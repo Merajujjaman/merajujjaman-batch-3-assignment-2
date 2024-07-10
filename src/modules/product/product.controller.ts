@@ -33,7 +33,27 @@ const getAllProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleProduct =async (req: Request, res: Response) => {
+    const id = req.params.productId
+    try {
+        const result = await productService.getSingleProductDB(id);
+        res.status(200).json({
+          success: true,
+          message: "Products fetched successfully!",
+          data: result,
+        });
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          message: "Something went wrong while fetching data",
+        });
+      }
+    
+    
+}
+
 export const productController = {
   createProduct,
-  getAllProduct
+  getAllProduct,
+  getSingleProduct
 };
