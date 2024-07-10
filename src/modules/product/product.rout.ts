@@ -1,11 +1,10 @@
-import  express, { Request, Response }  from 'express';
+import  express  from 'express';
+import { productController } from './product.controller';
 
 
 const router = express.Router()
 
-router.post('/', (req: Request, res: Response) => {
-    res.send("get gata")
-    console.log(req.body);
-  })
+router.post('/', productController.createProduct)
+router.get('/', productController.getAllProduct)
 
 export const ProductRoutes = router
