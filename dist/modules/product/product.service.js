@@ -23,8 +23,21 @@ const getSingleProductDB = (id) => __awaiter(void 0, void 0, void 0, function* (
     const result = yield product_model_1.Product.findOne({ _id: id });
     return result;
 });
+const updateProductDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.findByIdAndUpdate(id, { $set: payload }, { new: true });
+    return result;
+});
+const deleteProdectDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield product_model_1.Product.findByIdAndDelete(id);
+    if (result) {
+        return null;
+    }
+    return result;
+});
 exports.productService = {
     createProductDB,
     getAllProductDB,
-    getSingleProductDB
+    getSingleProductDB,
+    updateProductDB,
+    deleteProdectDB
 };

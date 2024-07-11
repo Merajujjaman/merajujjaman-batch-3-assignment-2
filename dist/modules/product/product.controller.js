@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.productController = void 0;
 const product_service_1 = require("./product.service");
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productDetailt = req.body;
     try {
+        const productDetailt = req.body;
         const result = yield product_service_1.productService.createProductDB(productDetailt);
         res.status(200).json({
             success: true,
@@ -25,6 +25,7 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             success: false,
             message: "Something went wrong while creating product data",
+            error
         });
     }
 });
@@ -41,12 +42,13 @@ const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             success: false,
             message: "Something went wrong while fetching data",
+            error
         });
     }
 });
 const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.params.productId;
     try {
+        const id = req.params.productId;
         const result = yield product_service_1.productService.getSingleProductDB(id);
         res.status(200).json({
             success: true,
@@ -58,11 +60,51 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({
             success: false,
             message: "Something went wrong while fetching data",
+            error
+        });
+    }
+});
+const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const updateData = req.body;
+        const result = yield product_service_1.productService.updateProductDB(id, updateData);
+        res.status(200).json({
+            success: true,
+            message: "Product updated successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while updating data",
+            error
+        });
+    }
+});
+const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.productId;
+        const result = yield product_service_1.productService.deleteProdectDB(id);
+        res.status(200).json({
+            success: true,
+            message: "Product deleted successfully!",
+            data: result,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while deleting data",
+            error
         });
     }
 });
 exports.productController = {
     createProduct,
     getAllProduct,
-    getSingleProduct
+    getSingleProduct,
+    updateProduct,
+    deleteProduct,
 };

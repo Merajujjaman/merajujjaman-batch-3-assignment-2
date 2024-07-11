@@ -14,8 +14,31 @@ const getSingleProductDB = async (id : string) => {
     return result
 }
 
+const updateProductDB = async(id: string, payload: Partial<TProduct>) => {
+    const result = await Product.findByIdAndUpdate(
+        id,
+        {$set: payload},
+        {new: true}
+    )
+
+    return result
+}
+
+const deleteProdectDB = async(id : string) => {
+    const result = await Product.findByIdAndDelete(id)
+
+    if (result) {
+        return null;
+    }
+
+    return result; 
+    
+}
+
 export const productService = {
     createProductDB,
     getAllProductDB,
-    getSingleProductDB
+    getSingleProductDB,
+    updateProductDB,
+    deleteProdectDB
 }
