@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { orderServices } from "./order.service";
 
@@ -10,11 +11,11 @@ const createOrder = async (req: Request, res: Response) => {
       message: "Order created successfully!",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong while order creating",
-      error,
+      message: error.message,
+      
     });
   }
 };
@@ -36,11 +37,10 @@ const getAllOrder = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (error) {
+  } catch (error : any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong while fetching all orders data",
-      EvalError
+      message: error.message
     });
   }
 };
