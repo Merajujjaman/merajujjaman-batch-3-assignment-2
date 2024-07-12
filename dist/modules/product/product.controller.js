@@ -25,24 +25,36 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             success: false,
             message: "Something went wrong while creating product data",
-            error
+            error,
         });
     }
 });
 const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield product_service_1.productService.getAllProductDB();
-        res.status(200).json({
-            success: true,
-            message: "Products fetched successfully!",
-            data: result,
-        });
+        const { searchTerm } = req.query;
+        // let result;
+        if (searchTerm) {
+            const result = yield product_service_1.productService.searchProductDB(searchTerm);
+            res.status(200).json({
+                success: true,
+                message: `Products matching search term ${searchTerm} fetched successfully!`,
+                data: result,
+            });
+        }
+        else {
+            const result = yield product_service_1.productService.getAllProductDB();
+            res.status(200).json({
+                success: true,
+                message: "Products fetched successfully!",
+                data: result,
+            });
+        }
     }
     catch (error) {
         res.status(500).json({
             success: false,
             message: "Something went wrong while fetching data",
-            error
+            error,
         });
     }
 });
@@ -60,7 +72,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({
             success: false,
             message: "Something went wrong while fetching data",
-            error
+            error,
         });
     }
 });
@@ -79,7 +91,7 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             success: false,
             message: "Something went wrong while updating data",
-            error
+            error,
         });
     }
 });
@@ -97,10 +109,15 @@ const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             success: false,
             message: "Something went wrong while deleting data",
-            error
+            error,
         });
     }
 });
+// const searchProduct = async (req: Request, res: Response) => {
+//   const searchTerm = req.query.searchTerm;
+//   res.send(searchTerm)
+//   console.log(searchTerm);
+// };
 exports.productController = {
     createProduct,
     getAllProduct,

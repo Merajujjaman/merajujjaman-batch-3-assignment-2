@@ -34,10 +34,21 @@ const deleteProdectDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return result;
 });
+const searchProductDB = (searchTerm) => __awaiter(void 0, void 0, void 0, function* () {
+    const searchText = new RegExp(searchTerm, "i");
+    const result = yield product_model_1.Product.find({
+        $or: [
+            { name: { $regex: searchText } },
+            { description: { $regex: searchText } }
+        ]
+    });
+    return result;
+});
 exports.productService = {
     createProductDB,
     getAllProductDB,
     getSingleProductDB,
     updateProductDB,
-    deleteProdectDB
+    deleteProdectDB,
+    searchProductDB
 };
