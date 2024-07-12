@@ -1,10 +1,9 @@
-import express, { Request, Response } from "express"
+import express from "express"
+import { orderControllers } from "./order.controller"
 
 const router = express.Router()
 
-router.get("/", (req: Request, res: Response) => {
-    res.send('Hello from Order rout')
-  })
+router.post("/", orderControllers.createOrder)
 
 
 export const orderRoutes = router
