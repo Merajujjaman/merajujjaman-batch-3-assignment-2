@@ -9,11 +9,4 @@ const order_controller_1 = require("./order.controller");
 const router = express_1.default.Router();
 router.post("/", order_controller_1.orderControllers.createOrder);
 router.get("/", order_controller_1.orderControllers.getAllOrder);
-// //not found rout:
-// router.all("*", (req: Request, res: Response) => {
-//     res.status(400).json({
-//       success: false,
-//       message: "Route not found",
-//     });
-//   });
 exports.orderRoutes = router;
