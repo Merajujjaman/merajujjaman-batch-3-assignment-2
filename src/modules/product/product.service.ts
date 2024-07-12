@@ -35,10 +35,24 @@ const deleteProdectDB = async(id : string) => {
     
 }
 
+const searchProductDB = async (searchTerm: string) => {
+    const searchText = new RegExp(searchTerm, "i")
+    
+    const result = await Product.find({
+        $or:[
+            {name : {$regex : searchText }}, 
+            {description : {$regex : searchText }} 
+        ]
+    })
+
+    return result
+}
+
 export const productService = {
     createProductDB,
     getAllProductDB,
     getSingleProductDB,
     updateProductDB,
-    deleteProdectDB
+    deleteProdectDB,
+    searchProductDB
 }

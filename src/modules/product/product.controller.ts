@@ -14,13 +14,20 @@ const createProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while creating product data",
-      error
+      error,
     });
   }
 };
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const result = await productService.getAllProductDB();
+    const { searchTerm } = req.query;
+    let result;
+    if (searchTerm) {
+      
+      result = await productService.searchProductDB(searchTerm as string);
+    } else {
+      result = await productService.getAllProductDB();
+    }
     res.status(200).json({
       success: true,
       message: "Products fetched successfully!",
@@ -30,7 +37,7 @@ const getAllProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while fetching data",
-      error
+      error,
     });
   }
 };
@@ -48,7 +55,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while fetching data",
-      error
+      error,
     });
   }
 };
@@ -66,7 +73,7 @@ const updateProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while updating data",
-      error
+      error,
     });
   }
 };
@@ -83,10 +90,16 @@ const deleteProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while deleting data",
-      error
+      error,
     });
   }
 };
+
+// const searchProduct = async (req: Request, res: Response) => {
+//   const searchTerm = req.query.searchTerm;
+//   res.send(searchTerm)
+//   console.log(searchTerm);
+// };
 
 export const productController = {
   createProduct,
