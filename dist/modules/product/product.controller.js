@@ -58,8 +58,7 @@ const getAllProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Something went wrong while fetching data",
-            error,
+            message: error.message,
         });
     }
 });
@@ -76,8 +75,7 @@ const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, functio
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Something went wrong while fetching data",
-            error,
+            message: error.message
         });
     }
 });
@@ -95,8 +93,7 @@ const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (error) {
         res.status(500).json({
             success: false,
-            message: "Something went wrong while updating data",
-            error,
+            message: error.message
         });
     }
 });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { productService } from "./product.service";
 import productValidationSchema from "./product.validation";
@@ -42,11 +43,10 @@ const getAllProduct = async (req: Request, res: Response) => {
       });
     }
     
-  } catch (error) {
+  } catch (error:any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong while fetching data",
-      error,
+      message: error.message,
     });
   }
 };
@@ -60,11 +60,11 @@ const getSingleProduct = async (req: Request, res: Response) => {
       message: "Products fetched successfully!",
       data: result,
     });
-  } catch (error) {
+  } catch (error : any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong while fetching data",
-      error,
+      message: error.message
+      
     });
   }
 };
@@ -78,11 +78,10 @@ const updateProduct = async (req: Request, res: Response) => {
       message: "Product updated successfully!",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong while updating data",
-      error,
+      message: error.message
     });
   }
 };

@@ -40,7 +40,6 @@ const getOrderByEmail = (email) => __awaiter(void 0, void 0, void 0, function* (
         return result;
     }
     else {
-        // return `No orders found for the email: ${email}`;
         throw new Error(`No orders found for the email: ${email}`);
     }
     // return result

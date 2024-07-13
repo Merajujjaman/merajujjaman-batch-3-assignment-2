@@ -36,7 +36,6 @@ const getOrderByEmail = async (email: string) => {
   if (result.length !== 0) {
     return result;
   } else {
-    // return `No orders found for the email: ${email}`;
     throw new Error(`No orders found for the email: ${email}`);
   }
   // return result
